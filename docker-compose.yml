@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: tourisme
+      MYSQL_USER: tourismeUser
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - my_network
+  app:
+    container_name: M1P10AndroidNode
+    stdin_open: true
+    tty: true
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - 50400:3000
+    volumes:
+      - ./:/var/www/M1P10AndroidNode
+    networks:
+      - my_network
+    restart: always
+volumes:
+  mysql_data:
+networks:
+  my_network:
+    driver: bridge
+
