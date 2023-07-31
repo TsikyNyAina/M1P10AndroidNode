@@ -5,7 +5,10 @@
   "main": "./dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node ./dist/index.js"
+    "start": "tsc && node ./dist/index.js",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "schema:drop": "npm run typeorm schema:drop -- -d ./database/index.ts",
+    "schema:sync": "npm run typeorm schema:sync -- -d ./database/index.ts"
   },
   "repository": {
     "type": "git",
@@ -32,6 +35,7 @@
     "@types/multer": "^1.4.7",
     "@types/node": "^18.11.18",
     "@types/swagger-ui-express": "^4.1.3",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^4.9.4"
   }
 }
