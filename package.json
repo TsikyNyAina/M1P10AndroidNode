@@ -5,7 +5,8 @@
   "main": "./dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node ./dist/index.js",
+    "build": "npm run schema:sync && tsc",
+    "start": "npm run build && node ./dist/index.js",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "schema:drop": "npm run typeorm schema:drop -- -d ./database/index.ts",
     "schema:sync": "npm run typeorm schema:sync -- -d ./database/index.ts"
