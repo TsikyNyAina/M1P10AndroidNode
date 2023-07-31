@@ -1,0 +1,28 @@
+import {
+    ManyToOne,
+    JoinColumn,
+    Column,
+    PrimaryGeneratedColumn,
+    Entity,
+  } from 'typeorm'; 
+import { Event } from './Event';
+import { json, swaggerIgnore } from '../decorator';
+import { ignore } from '../type';
+  
+  @Entity({ name: 'media' })
+  export class Media {
+    @PrimaryGeneratedColumn()
+    id: number;
+    @Column()
+    eventId: number;
+  
+    @Column({
+      type: 'simple-json',
+    })
+    fileInfo: any;
+    @swaggerIgnore
+    @ManyToOne(() => Event, (event) => event.media)
+    @JoinColumn({ name: 'eventId' })
+    event: Event;
+  }
+  
