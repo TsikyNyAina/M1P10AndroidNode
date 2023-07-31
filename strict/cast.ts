@@ -37,10 +37,10 @@ export function init2(): void {
     let old2:any=MediaController.prototype.save
     Object.defineProperty(MediaController.prototype,"save",{
         value:function(...arg:any[]){
-            if(arg[1] instanceof Media || !arg[1]){}
-            else if (typeof arg[1]!= 'object' )
-                throw new Error(JSON.stringify(arg[1]) +"cannot be casted to Media media  at MediaController.save");
-            else arg[1]=Object.assign(new Media(),arg[1]);
+            if(arg[2] instanceof Media || !arg[2]){}
+            else if (typeof arg[2]!= 'object' )
+                throw new Error(JSON.stringify(arg[2]) +"cannot be casted to Media media  at MediaController.save");
+            else arg[2]=Object.assign(new Media(),arg[2]);
 
             return old2.bind(this)(...arg);
         }
@@ -76,7 +76,21 @@ export function init4(): void {
 }
 
 export function init5(): void {
-    let old5:any=UserController.prototype.update
+    let old5:any=UserController.prototype.login
+    Object.defineProperty(UserController.prototype,"login",{
+        value:function(...arg:any[]){
+            if(arg[1] instanceof User || !arg[1]){}
+            else if (typeof arg[1]!= 'object' )
+                throw new Error(JSON.stringify(arg[1]) +"cannot be casted to User user  at UserController.login");
+            else arg[1]=Object.assign(new User(),arg[1]);
+
+            return old5.bind(this)(...arg);
+        }
+    })
+}
+
+export function init6(): void {
+    let old6:any=UserController.prototype.update
     Object.defineProperty(UserController.prototype,"update",{
         value:function(...arg:any[]){
             if(arg[2] instanceof User || !arg[2]){}
@@ -84,7 +98,7 @@ export function init5(): void {
                 throw new Error(JSON.stringify(arg[2]) +"cannot be casted to User user  at UserController.update");
             else arg[2]=Object.assign(new User(),arg[2]);
 
-            return old5.bind(this)(...arg);
+            return old6.bind(this)(...arg);
         }
     })
 }

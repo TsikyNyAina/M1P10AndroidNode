@@ -103,6 +103,7 @@ export function init1(): void {
 
             router.post("/",async (req:Request,res:Response)=>{
                 const arg=new Array<any>();
+                arg.push(req);
                 arg.push(res);
                 arg.push(req.body);
                 try{
@@ -177,6 +178,18 @@ export function init2(): void {
                 arg.push(req.body);
                 try{
                     await (this.save as any)(...arg);
+                }
+                catch(error:any){
+                    res.status(500).send(error?.message||error)
+                }
+            });
+
+            router.post("/login",async (req:Request,res:Response)=>{
+                const arg=new Array<any>();
+                arg.push(res);
+                arg.push(req.body);
+                try{
+                    await (this.login as any)(...arg);
                 }
                 catch(error:any){
                     res.status(500).send(error?.message||error)

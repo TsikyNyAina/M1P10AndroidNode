@@ -20,4 +20,9 @@ export class UserService{
     remove(id: number) {
         return this.repository.delete({ id });
     }
+    login(username:string,password:string){
+        return this.repository.findOneByOrFail({
+            username,password
+        })
+    }
 }
