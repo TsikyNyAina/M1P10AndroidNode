@@ -10,6 +10,10 @@ import swaggerJson from "./strict/swagger.json";
 import swaggerUi from "swagger-ui-express";
 import multer, { Multer } from "multer";
 import path from "path";
+import http from 'http';
+import { Server, Socket } from 'socket.io';
+
+
 dotenv.config();
 const upload = multer({ storage: multer.diskStorage({
   destination:path.join(
@@ -60,5 +64,45 @@ datasource.initialize().then(() => {
         swaggerUi.serve,
         swaggerUi.setup(swaggerJson, { explorer: true })
       ); 
-    app.listen(+port, hostname, () => console.log(`http://${hostname}:${port}`));
+    const server = http.createServer(app);
+    const io = new Server(server);
+
+
+    app.get("/hahaha",(req,res)=> { 
+      io.to("channel_abc").emit('message', JSON.stringify({
+        title:"hello world",
+        content:"METY "
+      }));
+      res.end()
+    })
+
+    
+
+
+
+    // io.on('connection', (socket: Socket) => {
+    //   console.log('A user connected');
+    
+    //   socket.on('joinChannel', (channel: string) => {
+    //     // Join the specified channel
+    //     socket.join(channel);
+    //     console.log(`User joined channel: ${channel}`);
+    //   });
+    
+    //   socket.on('sendMessage', (channel: string, message: string) => {
+    //     // Send the message to the specified channel
+    //     io.to(channel).emit('message', message);
+    //     console.log(`Message sent to channel ${channel}: ${message}`);
+    //   });
+    
+    //   socket.on('disconnect', () => {
+    //     console.log('A user disconnected');
+    //   });
+    // });
+
+
+
+
+    server.listen(+port,hostname, () => console.log(`http://${hostname}:${port}`));
+    
 });
