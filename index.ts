@@ -11,7 +11,7 @@ import swaggerUi from "swagger-ui-express";
 import multer, { Multer } from "multer";
 import path from "path";
 import http from 'http';
-import { Server, Socket } from 'socket.io';
+import initSocket from "./socket";
 
 
 dotenv.config();
@@ -64,35 +64,10 @@ datasource.initialize().then(() => {
         swaggerUi.serve,
         swaggerUi.setup(swaggerJson, { explorer: true })
       ); 
+
+
     const server = http.createServer(app);
-    const io = new Server(server);
-    
-
-    app.get("/hahaha",(req,res)=> {  
-      io.emit('channel_abc',JSON.stringify({
-        title:"hello world",
-        content:"METY "
-      }))   
-    })
-
-
-    
-
-
-
-    io.on('connection', (socket: Socket) => {
-      console.log('A user connected');
-      
-      
-      
-
-   
- 
-    
-      socket.on('disconnect', () => {
-        console.log('A user disconnected');
-      });
-    });
+    initSocket(server,app);
 
 
 
