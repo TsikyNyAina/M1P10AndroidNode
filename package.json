@@ -4,8 +4,8 @@
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
-    "install": "npm install",
-    "build": "npm run install && npm run schema:sync && tsc",
+    "installDep": "npm i",
+    "build": "npm run installDep && npm run schema:sync && tsc",
     "start": "npm run build && node ./dist/index.js",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "schema:drop": "npm run typeorm schema:drop -- -d ./database/index.ts",
