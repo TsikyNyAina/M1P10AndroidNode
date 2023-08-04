@@ -90,14 +90,18 @@ datasource.initialize().then(() => {
     //     socket.join(channel);
     //     console.log(`User joined channel: ${channel}`);
     //   });
+    socket.emit('channel_abc',JSON.stringify({
+      title:"hello world",
+      content:"METY "
+    }))
     
-      socket.on('sendMessage', (channel: string, message: string) => {
-         io.to("channel_abc").emit('message', JSON.stringify({
-          title:"hello world",
-          content:"METY "
-        }));
-        console.log(`Message sent to channel ${channel}: ${message}`);
-      });
+      // socket.on('sendMessage', (channel: string, message: string) => {
+      //    io.to("channel_abc").emit('message', JSON.stringify({
+      //     title:"hello world",
+      //     content:"METY "
+      //   }));
+      //   console.log(`Message sent to channel ${channel}: ${message}`);
+      // });
     
       socket.on('disconnect', () => {
         console.log('A user disconnected');
