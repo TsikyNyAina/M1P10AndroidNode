@@ -11,7 +11,7 @@ import swaggerUi from "swagger-ui-express";
 import multer, { Multer } from "multer";
 import path from "path";
 import http from 'http';
-import {initSocket,io} from "./socket";
+import {initSocket,io, sendNotif} from "./socket";
 
 
 dotenv.config();
@@ -71,12 +71,11 @@ datasource.initialize().then(() => {
 
 
     
-    app.get("/hahaha",(req,res)=> {  
-      res.end(io.emit('channel_abc',JSON.stringify({
+    app.get("/testnotif",(req,res)=>  res.end(sendNotif({
         title:"hello world",
         content:"METY "
-      }))   )
-    }) 
+      }))
+    ) 
 
 
 
