@@ -71,10 +71,11 @@ datasource.initialize().then(() => {
 
 
     
-    app.get("/testnotif",(req,res)=>  res.end(sendNotif({
+    app.get("/testnotif",(req,res)=>{ 
+      res.send(sendNotif({
         title:"hello world",
         content:"METY "
-      }))
+      })  )}
     ) 
 
 
