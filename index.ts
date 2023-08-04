@@ -68,10 +68,11 @@ datasource.initialize().then(() => {
     const io = new Server(server);
     
 
-    app.get("/hahaha",(req,res)=> { 
-      
-      
-      res.send(io.emit("sendMessage"))
+    app.get("/hahaha",(req,res)=> {  
+      io.emit('channel_abc',JSON.stringify({
+        title:"hello world",
+        content:"METY "
+      }))   
     })
 
 
@@ -85,20 +86,8 @@ datasource.initialize().then(() => {
       
       
 
-    //   socket.on('joinChannel', (channel: string) => {
-    //     // Join the specified channel
-    //     socket.join(channel);
-    //     console.log(`User joined channel: ${channel}`);
-    //   });
-    
-    
-      socket.on('sendMessage', (channel: string, message: string) => {
-        console.log("hahahha")
-        socket.emit('channel_abc',JSON.stringify({
-          title:"hello world",
-          content:"METY "
-        }))  
-      });
+   
+ 
     
       socket.on('disconnect', () => {
         console.log('A user disconnected');
