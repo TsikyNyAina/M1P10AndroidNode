@@ -66,7 +66,7 @@ datasource.initialize().then(() => {
       ); 
     const server = http.createServer(app);
     const io = new Server(server);
-
+    
 
     app.get("/hahaha",(req,res)=> { 
       io.to("channel_abc").emit('message', JSON.stringify({
@@ -80,8 +80,8 @@ datasource.initialize().then(() => {
 
 
 
-    // io.on('connection', (socket: Socket) => {
-    //   console.log('A user connected');
+    io.on('connection', (socket: Socket) => {
+      console.log('A user connected');
     
     //   socket.on('joinChannel', (channel: string) => {
     //     // Join the specified channel
@@ -98,7 +98,7 @@ datasource.initialize().then(() => {
     //   socket.on('disconnect', () => {
     //     console.log('A user disconnected');
     //   });
-    // });
+    });
 
 
 
