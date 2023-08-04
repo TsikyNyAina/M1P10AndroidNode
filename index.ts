@@ -69,12 +69,11 @@ datasource.initialize().then(() => {
     
 
     app.get("/hahaha",(req,res)=> { 
-      io.to("channel_abc").emit('message', JSON.stringify({
-        title:"hello world",
-        content:"METY "
-      }));
-      res.end()
+      
+      
+      res.send(io.emit("sendMessage"))
     })
+
 
     
 
@@ -82,22 +81,27 @@ datasource.initialize().then(() => {
 
     io.on('connection', (socket: Socket) => {
       console.log('A user connected');
-    
+      
+      
+      
+
     //   socket.on('joinChannel', (channel: string) => {
     //     // Join the specified channel
     //     socket.join(channel);
     //     console.log(`User joined channel: ${channel}`);
     //   });
     
-    //   socket.on('sendMessage', (channel: string, message: string) => {
-    //     // Send the message to the specified channel
-    //     io.to(channel).emit('message', message);
-    //     console.log(`Message sent to channel ${channel}: ${message}`);
-    //   });
+      socket.on('sendMessage', (channel: string, message: string) => {
+         io.to("channel_abc").emit('message', JSON.stringify({
+          title:"hello world",
+          content:"METY "
+        }));
+        console.log(`Message sent to channel ${channel}: ${message}`);
+      });
     
-    //   socket.on('disconnect', () => {
-    //     console.log('A user disconnected');
-    //   });
+      socket.on('disconnect', () => {
+        console.log('A user disconnected');
+      });
     });
 
 
