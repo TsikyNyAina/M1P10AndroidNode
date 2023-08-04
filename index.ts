@@ -11,7 +11,7 @@ import swaggerUi from "swagger-ui-express";
 import multer, { Multer } from "multer";
 import path from "path";
 import http from 'http';
-import initSocket from "./socket";
+import {initSocket,io} from "./socket";
 
 
 dotenv.config();
@@ -64,11 +64,19 @@ datasource.initialize().then(() => {
         swaggerUi.serve,
         swaggerUi.setup(swaggerJson, { explorer: true })
       ); 
-
+    
 
     const server = http.createServer(app);
     initSocket(server,app);
 
+
+    
+    app.get("/hahaha",(req,res)=> {  
+      res.end(io.emit('channel_abc',JSON.stringify({
+        title:"hello world",
+        content:"METY "
+      }))   )
+    }) 
 
 
 
