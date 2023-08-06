@@ -213,6 +213,19 @@
                 ]
             }
         },
+        "/media/fileList": {
+            "get": {
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "MediaController"
+                ]
+            }
+        },
         "/media/{option}": {
             "get": {
                 "parameters": [

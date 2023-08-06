@@ -3,10 +3,26 @@ import { Request, Response, Express } from "express";
 import { MediaService } from "../service";
 import { Option } from "../type";
 import { Media } from "../entity";
+import fs from "fs"
+import path from "path";
 @RestController("/media")
 export class MediaController{
     rest: (app: Express) => void;
     private mediaService=new MediaService
+    @Get("/fileList")
+    async getFileList(res: Response ){
+   // async getAll(res: Response, option:Option){
+    fs.readdir(path.join(
+        __dirname.replace("/dist", ""),"..",
+        "uploads"), (err, files) => {
+        if (err) {
+          res.status(400).json(err)
+        } else {
+          res.json(files)
+        }
+      });
+
+   }
      @Get("/:option")
      async getAll(res: Response,@RequestParam("option") option:Option){
     // async getAll(res: Response, option:Option){
