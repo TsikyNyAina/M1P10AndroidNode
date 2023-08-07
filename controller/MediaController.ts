@@ -37,10 +37,14 @@ export class MediaController{
     @Post("/")
     async save(req:Request,res: Response,@RequestBody @cast media:Media){ 
     // async save(req:Request,res: Response, media:Media){ 
-        
-        media.fileInfo={...req.file} 
-        
-        res.send(await this.mediaService.create(media))  
+        try{
+            media.fileInfo={...req.file}  
+            res.send(await this.mediaService.create(media))  
+         
+        } catch (error:any) {
+            console.log(error.getMessage());
+            throw error; 
+        }
     }
      @Put("/")
      async update(res: Response,@RequestParam("id") id:number,@RequestBody @cast media:Media){ 

@@ -23,7 +23,13 @@ export class EventController{
     @Post("/")
     async save(res: Response,@RequestBody @cast event:Event){ 
     // async save(res: Response,  event:Event){ 
-        res.send(await this.eventService.create(event)) 
+        try {
+            res.send(await this.eventService.create(event)) 
+        } catch (error:any) {
+            console.log(error.getMessage());
+            throw error; 
+        }
+        
     }
     @Put("/")
     async update(res: Response,@RequestParam("id") id:number,@RequestBody @cast event:Event){ 
