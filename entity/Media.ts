@@ -21,11 +21,15 @@ import { ignore } from '../type';
   
     @Column({
       type: 'simple-json',
+      nullable:true
     })
     fileInfo: any;
     @swaggerIgnore
     @ManyToOne(() => Event, (event) => event.media)
     @JoinColumn({ name: 'eventId' })
     event: Event;
+
+    @Column ({nullable:true})
+    webUrl:string;
   }
   

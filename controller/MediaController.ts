@@ -46,6 +46,17 @@ export class MediaController{
             throw error; 
         }
     }
+    @Post("/weburl")
+    async saveMediaWebUrl(req:Request,res: Response,@RequestBody @cast media:Media){ 
+    // async save(req:Request,res: Response, media:Media){ 
+        try{
+            res.send(await this.mediaService.create(media))  
+         
+        } catch (error:any) {
+            console.log(error.getMessage());
+            throw error; 
+        }
+    }
      @Put("/")
      async update(res: Response,@RequestParam("id") id:number,@RequestBody @cast media:Media){ 
     // async update(res: Response,  id:number,  media:Media){ 

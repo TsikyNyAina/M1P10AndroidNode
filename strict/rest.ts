@@ -125,6 +125,19 @@ export function init1(): void {
                 }
             });
 
+            router.post("/weburl",async (req:Request,res:Response)=>{
+                const arg=new Array<any>();
+                arg.push(req);
+                arg.push(res);
+                arg.push(req.body);
+                try{
+                    await (this.saveMediaWebUrl as any)(...arg);
+                }
+                catch(error:any){
+                    res.status(500).send(error?.message||error)
+                }
+            });
+
             router.put("/",async (req:Request,res:Response)=>{
                 const arg=new Array<any>();
                 arg.push(res);
