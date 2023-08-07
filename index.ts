@@ -12,8 +12,7 @@ import multer, { Multer } from "multer";
 import path from "path";
 import http from 'http';
 import {initSocket,io, sendNotif} from "./socket";
-
-
+const mime = require('mime');
 dotenv.config();
 const upload = multer({ storage: multer.diskStorage({
   destination:path.join(
@@ -51,7 +50,10 @@ datasource.initialize().then(() => {
         "uploads",
         filename
       );
+      
+      const mimeType = mime.getType(filePath); 
       res.setHeader("Content-Disposition", `attachment; filename=${filename}`);
+      res.setHeader('Content-Type', mimeType);
       res.sendFile(filePath);
     });
   
