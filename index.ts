@@ -56,7 +56,19 @@ datasource.initialize().then(() => {
       res.setHeader('Content-Type', mimeType);
       res.sendFile(filePath);
     });
-  
+    app.use("/fileNotAttachment/", function (req, res) {
+      const filename = req.url;
+      const filePath = path.join(
+        __dirname.replace("/dist", ""),
+        "uploads",
+        filename
+      );
+      
+      const mimeType = mime.getType(filePath); 
+       
+      res.setHeader('Content-Type', mimeType);
+      res.sendFile(filePath);
+    });
 
 
 
