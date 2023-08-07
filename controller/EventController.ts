@@ -22,6 +22,8 @@ export class EventController{
     }
     @Post("/")
     async save(res: Response,@RequestBody @cast event:Event){ 
+        console.log(event);
+        
     // async save(res: Response,  event:Event){ 
         try {
             res.send(await this.eventService.create(event)) 

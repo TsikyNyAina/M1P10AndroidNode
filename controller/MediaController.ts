@@ -36,6 +36,7 @@ export class MediaController{
     }
     @Post("/")
     async save(req:Request,res: Response,@RequestBody @cast media:Media){ 
+        console.log(media);
     // async save(req:Request,res: Response, media:Media){ 
         try{
             media.fileInfo={...req.file}  
@@ -48,6 +49,7 @@ export class MediaController{
     }
     @Post("/weburl")
     async saveMediaWebUrl(req:Request,res: Response,@RequestBody @cast media:Media){ 
+        console.log(media);
     // async save(req:Request,res: Response, media:Media){ 
         try{
             res.send(await this.mediaService.create(media))  
