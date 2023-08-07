@@ -18,6 +18,10 @@ import { User } from './User';
       nullable: true,
     })
     description: string;
+    @Column({ nullable: false })
+    titre: string;
+    @Column({ nullable: false })
+    lieu:string;
     @CreateDateColumn()
     createdAt: Date;
     @DeleteDateColumn()

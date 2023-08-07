@@ -10,7 +10,7 @@ const db = new DataSource({
   port: +(process.env.DATABASE_PORT ?? 3306),
   username: process.env.DATABASE_USERNAME ?? 'root',
   password: process.env.DATABASE_PASSWORD ?? 'password',
-  database: process.env.DATABASE_NAME ?? 'tourisme',
+  database: process.env.DATABASE_NAME ?? 'projetm1',
   entities: Object.values(entity),
   logging: false,
   synchronize: false,

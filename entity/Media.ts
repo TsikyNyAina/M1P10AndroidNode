@@ -15,6 +15,9 @@ import { ignore } from '../type';
     id: number;
     @Column()
     eventId: number;
+
+    @Column()
+    type: string;
   
     @Column({
       type: 'simple-json',
