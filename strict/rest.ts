@@ -77,6 +77,17 @@ export function init1(): void {
     Object.defineProperty(MediaController.prototype,"rest",{
         value:function(app:Express){
             const router=Router();
+            router.get("/fileList",async (req:Request,res:Response)=>{
+                const arg=new Array<any>();
+                arg.push(res);
+                try{
+                    await (this.getFileList as any)(...arg);
+                }
+                catch(error:any){
+                    res.status(500).send(error?.message||error)
+                }
+            });
+
             router.get("/:option",async (req:Request,res:Response)=>{
                 const arg=new Array<any>();
                 arg.push(res);
